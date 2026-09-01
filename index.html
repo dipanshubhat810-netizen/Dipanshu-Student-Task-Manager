@@ -17,6 +17,21 @@
         </header>
 
         <div class="task-input">
+<div class="task-input">
+    <input
+        type="text"
+        id="taskInput"
+        placeholder="Enter a new task..."
+    >
+
+    <select id="priorityInput">
+        <option value="Low">Low</option>
+        <option value="Medium" selected>Medium</option>
+        <option value="High">High</option>
+    </select>
+
+    <button onclick="addTask()">Add Task</button>
+</div>
             <input
                 type="text"
                 id="taskInput"
