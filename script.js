@@ -1,3 +1,11 @@
+const priority = document.getElementById("priorityInput").value;
+
+const task = {
+    id: Date.now(),
+    title: taskText,
+    priority: priority,
+    completed: false
+};
 let tasks = [];
 
 function addTask() {
