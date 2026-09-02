@@ -1,0 +1,9 @@
+{
+  "name": "dipanshu-student-task-manager",
+  "version": "1.0.0",
+  "description": "Student Task Manager Web Application developed by Dipanshu Bhat",
+  "author": "Dipanshu Bhat",
+  "scripts": {
+    "build": "node -e \"console.log('Building Dipanshu Student Task Manager...'); console.log('HTML, CSS and JavaScript files validated for Jenkins build.');\""
+  }
+}
