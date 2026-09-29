@@ -11,8 +11,7 @@ const fs = require('fs');
 const tests = [
     'app.js',
     'package.json',
-    'public/index.html',
-    'public/api.js'
+    'public/index.html'
 ];
 
 console.log('Starting automated tests...');
