@@ -1,0 +1,60 @@
+#!/usr/bin/env node
+/**
+ * Dipanshu's Student Task Manager - HTTP server.
+ *
+ * Serves the static application from ./public and listens on 0.0.0.0:3000 so
+ * that the Docker container and the Kubernetes Pods accept connections from
+ * outside the Container.
+ */
+
+const http = require("http");
+const fs = require("fs");
+const path = require("path");
+
+const PORT = 3000;
+const PUBLIC_DIR = path.join(__dirname, "public");
+
+const CONTENT_TYPES = {
+    ".html": "text/html; charset=utf-8",
+    ".css": "text/css; charset=utf-8",
+    ".js": "text/javascript; charset=utf-8",
+    ".json": "application/json; charset=utf-8",
+    ".svg": "image/svg+xml",
+    ".ico": "image/x-icon",
+    ".png": "image/png"
+};
+
+const server = http.createServer((req, res) => {
+
+    const requestedPath = req.url === "/" ? "/index.html" : req.url.split("?")[0];
+
+    const normalised = path
+        .normalize(requestedPath)
+        .replace(/^(\.\.[/\\])+/, "");
+
+    const filePath = path.join(PUBLIC_DIR, normalised);
+
+    if (!filePath.startsWith(PUBLIC_DIR)) {
+        res.writeHead(403, { "Content-Type": "text/plain; charset=utf-8" });
+        res.end("403 Forbidden");
+        return;
+    }
+
+    fs.readFile(filePath, (error, data) => {
+
+        if (error) {
+            res.writeHead(404, { "Content-Type": "text/plain; charset=utf-8" });
+            res.end("404 Not Found");
+            return;
+        }
+
+        const contentType = CONTENT_TYPES[path.extname(filePath)] || "application/octet-stream";
+
+        res.writeHead(200, { "Content-Type": contentType });
+        res.end(data);
+    });
+});
+
+server.listen(PORT, "0.0.0.0", () => {
+    console.log(`Student Task Manager running on port ${PORT}`);
+});

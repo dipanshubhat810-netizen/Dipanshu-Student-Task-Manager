@@ -1,11 +1,3 @@
-const priority = document.getElementById("priorityInput").value;
-
-const task = {
-    id: Date.now(),
-    title: taskText,
-    priority: priority,
-    completed: false
-};
 let tasks = [];
 
 function addTask() {
@@ -17,9 +9,12 @@ function addTask() {
         return;
     }
 
+    const priority = document.getElementById("priorityInput").value;
+
     const task = {
         id: Date.now(),
         title: taskText,
+        priority: priority,
         completed: false
     };
 
@@ -67,6 +62,8 @@ function renderTasks() {
         li.innerHTML = `
             <span>${task.title}</span>
 
+            <span class="priority ${task.priority}">${task.priority}</span>
+
             <div class="task-actions">
 
                 <button
@@ -103,9 +100,10 @@ function updateSummary() {
     document.getElementById("totalTasks").textContent = total;
     document.getElementById("completedTasks").textContent = completed;
     document.getElementById("pendingTasks").textContent = pending;
-    document.getElementById("taskInput").addEventListener("keypress", function(event) {
+}
+
+document.getElementById("taskInput").addEventListener("keypress", function (event) {
     if (event.key === "Enter") {
         addTask();
     }
 });
-}

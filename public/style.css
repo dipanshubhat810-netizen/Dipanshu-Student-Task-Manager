@@ -81,9 +81,39 @@ button:hover {
     border-bottom: 1px solid #ddd;
 }
 
+.task > span:first-child {
+    flex: 1;
+    margin-right: 12px;
+}
+
 .task.completed span {
     text-decoration: line-through;
     color: #888;
+}
+
+.priority {
+    font-size: 12px;
+    font-weight: bold;
+    padding: 4px 10px;
+    border-radius: 20px;
+    margin-right: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.priority.Low {
+    background: #dcfce7;
+    color: #15803d;
+}
+
+.priority.Medium {
+    background: #fef9c3;
+    color: #a16207;
+}
+
+.priority.High {
+    background: #fee2e2;
+    color: #b91c1c;
 }
 
 .task-actions {
